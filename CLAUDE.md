@@ -10,7 +10,7 @@
 | 場所 | URL | 備考 |
 |---|---|---|
 | GitHub（本リポジトリ） | https://github.com/nancyyacht/storm-calc | `index.html` が正本。Pages 公開URL：`https://nancyyacht.github.io/storm-calc/`（2026-10-06 に表示を確認済み）。旧ユーザー名 `amuzaq` から変更済みで、旧URLは使えない |
-| claude.ai Artifact | https://claude.ai/artifact/Fe4fk5Bb8qqtpq6KV3wPU8（Version 23） | 公開時に `<!doctype>`・viewport が自動で付く。GitHub版はこれらを手書きで足してある |
+| claude.ai Artifact | https://claude.ai/artifact/Fe4fk5Bb8qqtpq6KV3wPU8（Version 25） | 公開時に `<!doctype>`・viewport が自動で付く。GitHub版はこれらを手書きで足してある |
 
 - 内容を直したら**両方**を更新する。Artifact は同じURLを指定して再公開すれば、リンクは変わらない（Artifact の `url` 指定が必要）。
 - Artifact側の元ファイルは、前のセッションの作業フォルダにあり、引き継がれない。GitHub の `index.html` から、先頭の `<!doctype>〜<head>` の手書き部分（`<meta name="viewport">` と末尾の `[hidden]` などの小さな `<style>`）を除いて公開する。
@@ -74,6 +74,12 @@
 - リセットボタンは黄色（--mustard）の文字と枠。予測カードのゾーン表記は「Z5 [待機] 0:30」の形で大きく表示し、待機・収縮を同じ色の札で分けている。
 - ライブのカウントダウンは切り上げ表示（四捨五入だと1秒早く 0:00 になるため）。経過時間は切り捨て。
 
+## サージの時期（2026-10-20 確定）
+- 表の Zn の人数は、**Zn の収縮中に警告**、**Z(n+1) の待機の初め〜Z(n+1) の収縮の終わりに有効**。例：Z5＝60人 → Z5 収縮で警告、Z6 待機 0:28 ごろから60人超でサージ。
+- 根拠：サーバーリプレイ15試合（ソロ・デュオ・トリオ、2026/10/5〜19）の実測と、Kaz 提供の「Surge insights」。詳細は `../replay-pipeline/HANDOFF.md`。
+- 画面：ゾーン表の入力欄の下に「→Z(n+1)で有効」、ライブのゾーンカードは「サージ（そのゾーンで有効な人数）」「警告（収縮中）」、区間の内訳は「サージ（有効）」列（収縮中は警告も）。
+- 以前の認識「Zn 待機で警告、Zn 収縮で開始」は実測と合わなかった（Z5 収縮中に生存72〜86人でもサージなし）。
+
 ## サージ人数（ゾーン別表の列）
 - ユーザー提供の最新の表（2026-10-06）：Z1=100、Z2〜3=90、Z4=Solo 75／Duo 76、Z5=60、Z6=50、Z7〜12=40（表示は「N人超」）。Z0 は表にないので「なし」。Trio・Squads も Solo と同じ値。
 - 同じ表で、サージのダメージは25、間隔（Tick Interval）は5秒、Dealt・Taken はいずれも1x。計算機ではまだ使っていない。
@@ -96,7 +102,7 @@
   - 黒い円の直径を約30pxに統一。画像はコード内の `ZIMG` に base64 で埋め込み。差し替えるときは、ここを書き換える。
 
 ## デザイン
-- アプリ名（タブ名・ホーム画面に追加したときの名前）は「Storm-calc」（`<title>`、GitHub版は `application-name` と `apple-mobile-web-app-title` の meta も）。画面内の見出しは「ストームシックネス計算機」のまま。
+- アプリ名（タブ名・ホーム画面に追加したときの名前）は「Storm-calc」（`<title>`、GitHub版は `application-name` と `apple-mobile-web-app-title` の meta も）。画面内の見出し（`<h1>`）は「Storm-Calc」（2026-10-23、ユーザー指定。C は大文字）。
 - 「やさしいグレー」仕様（紺 #33506B、背景 #F5F5F0、ポイント #D6AD32 ほか）。
 - 色はすべて CSS 変数で定義し、ダークモードにも対応。アイコンは Material Symbols Outlined。
 - フォント：Zen Kaku Gothic New と Roboto（Google Fonts）。読み込めない環境では代替書体。
