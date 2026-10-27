@@ -16,14 +16,14 @@ img{max-width:100%}
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 <style>
 /* フォートナイトスタイル（Scrim Kaiseki と同じ見た目）。暗い面・細い罫線。
-   操作の色はアイスシアン、紫はサージ専用なのでここでは使わない。
-   予測の3段階：警告＝琥珀、ストーム酔＝コーラル、即死＝赤（上限の色） */
+   操作の色はアイスシアン。紫はサージ専用（ストーム酔＝サージ開始も含む）。
+   予測の3段階：警告＝琥珀、ストーム酔（サージ）＝紫、即死＝赤（上限の色） */
 :root {
   --bg:#101116; --panel:#191922; --raised:#201F2B; --header:#242132;
   --text:#EEEAF7; --muted:#B4AEC4; --line:#34313F; --line-strong:#80768F; --row:#24222E;
   --accent:#8ADCE8; --accent-ink:#0E1B1E; --accent-soft:#1B2D33;
   --calc:#4FB6FF; --limit:#F26D6D; --warn:#EAC478; --bad:#F2A193; --alive:#91D5B6;
-  --warn-soft:#2E2819; --sick:#F2A193; --sick-soft:#33221F; --limit-soft:#361C1F;
+  --warn-soft:#2E2819; --sick:#D4ADFF; --sick-soft:#30263F; --limit-soft:#361C1F;
   --band:#1E1D27;
   --font:"Inter","Segoe UI","Noto Sans JP","Yu Gothic UI",Meiryo,sans-serif;
   --r-ctl:6px; --r-panel:10px; --h-ctl:36px; --dur:140ms;
@@ -201,6 +201,7 @@ body:not(.live) #liveSec { display:none; }
 .lst { display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; }
 .lst .s { font-weight:600; font-size:17px; }
 .lst .s.in { color:var(--bad); }
+.lst .s.sg { color:var(--sick); }
 .lst .acc { font-weight:600; color:var(--muted); }
 .abar { position:relative; height:8px; background:rgba(255,255,255,.1); border-radius:999px; margin-block:4px; }
 .abar > i { position:absolute; left:0; top:0; bottom:0; background:var(--calc); border-radius:999px; }
@@ -787,7 +788,7 @@ body:not(.live) #liveSec { display:none; }
 
     var surging = s.a >= p.i;
     $("lStat").textContent = !started ? "開始前" : s.inside ? (surging ? (n > 1 ? "再サージ中" : "サージ中") + "（×" + num1(p.mul) + "）" : (n > 1 ? "ストーム再突入中" : "ストーム内")) : (n === 0 ? "安地内" : "一時脱出中");
-    $("lStat").className = "s" + (s.inside ? " in" : "");
+    $("lStat").className = "s" + (s.inside ? (surging ? " in sg" : " in") : "");
     $("lAcc").textContent = "蓄積 " + Math.floor(s.a) + " / " + p.k;
     var pc = function (v) { return Math.max(0, Math.min(100, v / p.k * 100)); };
     setH("lBar", '<i style="width:' + pc(s.a).toFixed(1) + '%"></i><b style="left:' + pc(p.w) + '%;background:var(--warn)"></b><b style="left:' + pc(p.i) + '%;background:var(--sick)"></b>');
