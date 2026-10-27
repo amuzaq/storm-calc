@@ -103,9 +103,12 @@
 
 ## デザイン
 - アプリ名（タブ名・ホーム画面に追加したときの名前）は「Storm-calc」（`<title>`、GitHub版は `application-name` と `apple-mobile-web-app-title` の meta も）。画面内の見出し（`<h1>`）は「Storm-Calc」（2026-10-23、ユーザー指定。C は大文字）。
-- 「やさしいグレー」仕様（紺 #33506B、背景 #F5F5F0、ポイント #D6AD32 ほか）。
-- 色はすべて CSS 変数で定義し、ダークモードにも対応。アイコンは Material Symbols Outlined。
-- フォント：Zen Kaku Gothic New と Roboto（Google Fonts）。読み込めない環境では代替書体。
+- 2026-10-27 に「フォートナイトスタイル」（Scrim Kaiseki と同じ見た目、スキル `fortnite-style`）へ作り直した。計算・HTML構造・JS は変えず、CSS と色だけ差し替え。変更前は `work/index-before-fnstyle-20261027.html`。
+- ダーク専用（背景 #101116、パネル #191922）。操作の色はアイスシアン #8ADCE8。紫はサージ専用の決まりなので使わない。
+- 予測の3段階の色：警告＝琥珀 `--warn` #EAC478、ストーム酔＝コーラル `--sick` #F2A193（旧：紫）、即死＝赤 `--limit` #F26D6D。蓄積の線・バー＝`--calc` #4FB6FF。
+- 待機の札＝琥珀、収縮の札＝灰（旧：黄／コーラル）。現在のゾーンのカードはアクセント色の枠＋薄いシアンの面（旧：紺地に金枠）。ストームボタンは突入＝コーラル、脱出＝ミント。
+- グラフの下に凡例を追加。
+- フォント：Inter と Noto Sans JP（Google Fonts）。アイコンは Material Symbols Outlined。
 
 ## 作業上の注意
 - `style="display:flex"` のようにタグへ直接書いた指定は、メディアクエリのCSSより優先される。ヘッダーを非表示にしたときは `!important` が必要だった。
